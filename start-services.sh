@@ -105,6 +105,7 @@ echo "Para testar os serviços, execute: node client-demo.js"
 echo ""
 
 # Salvar PIDs em arquivo para o script de parada
+mkdir -p .pids
 echo "$GATEWAY_PID" > .pids/api-gateway.pid
 echo "$USER_PID" > .pids/user-service.pid
 echo "$LIST_PID" > .pids/list-service.pid

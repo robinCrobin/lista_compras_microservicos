@@ -172,7 +172,19 @@ class JsonDatabase {
     async search(query, fields = []) {
         try {
             const documents = await this.readAll();
-            const searchTerm = query.toLowerCase();
+            
+            // Tratar caso onde query pode ser um array (parâmetros duplicados)
+            let searchQuery = query;
+            if (Array.isArray(query)) {
+                searchQuery = query[0];
+            }
+            
+            // Garantir que é uma string
+            if (typeof searchQuery !== 'string') {
+                searchQuery = String(searchQuery);
+            }
+            
+            const searchTerm = searchQuery.toLowerCase();
 
             return documents.filter(doc => {
                 // Se campos específicos foram fornecidos, buscar apenas neles
